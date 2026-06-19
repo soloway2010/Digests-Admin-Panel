@@ -1,0 +1,4 @@
+UPDATE public."teammates" SET
+		"user_id" = '{{update_form.fieldState.user_id.isVisible ? update_form.formData.user_id : update_form.sourceData.user_id}}',
+		"user_name" = '{{update_form.fieldState.user_name.isVisible ? update_form.formData.user_name : update_form.sourceData.user_name}}'
+WHERE "id" = {{data_table.selectedRow.id}};

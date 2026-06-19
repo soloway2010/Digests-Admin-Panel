@@ -1,0 +1,1 @@
+SELECT * FROM public."digests" where id = {{data_table.selectedItem.id}};

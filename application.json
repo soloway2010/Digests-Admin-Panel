@@ -1,0 +1,21 @@
+{
+  "appIsExample": false,
+  "applicationVersion": 2,
+  "collapseInvisibleWidgets": true,
+  "color": "#EAEDFB",
+  "evaluationVersion": 2,
+  "pages": [
+    {
+      "id": "Activities",
+      "isDefault": true
+    },
+    {
+      "id": "Teammates",
+      "isDefault": false
+    },
+    {
+      "id": "Submitted digests",
+      "isDefault": false
+    }
+  ]
+}

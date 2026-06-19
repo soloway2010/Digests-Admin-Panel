@@ -1,0 +1,6 @@
+INSERT INTO public."teammates" (
+	"user_id",
+	"user_name")
+VALUES (
+	'{{insert_form.formData.user_id}}',
+	'{{insert_form.formData.user_name}}');

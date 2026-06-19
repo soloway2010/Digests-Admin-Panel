@@ -1,0 +1,6 @@
+INSERT INTO public."activities" (
+	"name",
+	"points")
+VALUES (
+	'{{insert_form.formData.name}}',
+	'{{insert_form.formData.points}}');
