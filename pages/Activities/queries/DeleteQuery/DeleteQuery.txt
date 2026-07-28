@@ -1,2 +1,0 @@
-DELETE FROM public."activities"
-  WHERE "id" = {{data_table.triggeredRow.id}};

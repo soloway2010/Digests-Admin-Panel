@@ -1,4 +1,0 @@
-UPDATE public."activities" SET
-		"name" = '{{update_form.fieldState.name.isVisible ? update_form.formData.name : update_form.sourceData.name}}',
-		"points" = '{{update_form.fieldState.points.isVisible ? update_form.formData.points : update_form.sourceData.points}}'
-WHERE "id" = {{data_table.selectedRow.id}};

@@ -1,5 +1,5 @@
 SELECT * FROM public."teammates"
-WHERE "user_id" ilike '%{{data_table.searchText || ""}}%'
-ORDER BY "{{data_table.sortOrder.column || 'id'}}" {{data_table.sortOrder.order || 'ASC'}}
+WHERE "user_name" ilike '%{{data_table.searchText || ""}}%'
+ORDER BY "{{data_table.sortOrder.column || 'user_name'}}" {{data_table.sortOrder.order || 'ASC'}}
 LIMIT {{data_table.pageSize}}
 OFFSET {{(data_table.pageNo - 1) * data_table.pageSize}};

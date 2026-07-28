@@ -1,5 +1,5 @@
 SELECT * FROM public."digests"
 WHERE "user_id" ilike '%{{""}}%'
-ORDER BY "{{'id'}}" {{'ASC'}}
+ORDER BY submitted_at DESC
 LIMIT {{data_table.pageSize}}
 OFFSET {{(data_table.pageNo - 1) * data_table.pageSize}};
