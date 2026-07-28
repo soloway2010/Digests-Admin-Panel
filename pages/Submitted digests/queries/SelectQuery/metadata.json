@@ -5,7 +5,7 @@
   "pluginType": "DB",
   "unpublishedAction": {
     "actionConfiguration": {
-      "body": "SELECT * FROM public.\"digests\"\nWHERE \"user_id\" ilike '%{{\"\"}}%'\nORDER BY submitted_at DESC\nLIMIT {{data_table.pageSize}}\nOFFSET {{(data_table.pageNo - 1) * data_table.pageSize}};",
+      "body": "SELECT * FROM public.\"digests\"\nWHERE \"user_name\" ilike '%{{appsmith.user.email.split('@')[0]}}%'\nORDER BY submitted_at DESC\nLIMIT {{data_table.pageSize}}\nOFFSET {{(data_table.pageNo - 1) * data_table.pageSize}};",
       "encodeParamsToggle": true,
       "paginationType": "NONE",
       "pluginSpecifiedTemplates": [

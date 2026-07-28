@@ -1,5 +1,5 @@
 SELECT * FROM public."digests"
-WHERE "user_id" ilike '%{{""}}%'
+WHERE "user_name" ilike '%{{appsmith.user.email.split('@')[0]}}%'
 ORDER BY submitted_at DESC
 LIMIT {{data_table.pageSize}}
 OFFSET {{(data_table.pageNo - 1) * data_table.pageSize}};

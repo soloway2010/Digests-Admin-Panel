@@ -7,11 +7,11 @@
   "pages": [
     {
       "id": "Teammates",
-      "isDefault": true
+      "isDefault": false
     },
     {
       "id": "Submitted digests",
-      "isDefault": false
+      "isDefault": true
     }
   ]
 }
