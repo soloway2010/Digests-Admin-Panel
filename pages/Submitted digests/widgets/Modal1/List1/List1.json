@@ -85,7 +85,11 @@
       "key": "listData"
     }
   ],
-  "dynamicTriggerPathList": [],
+  "dynamicTriggerPathList": [
+    {
+      "key": "onItemClick"
+    }
+  ],
   "enhancements": true,
   "flexVerticalAlignment": "start",
   "gridType": "vertical",
@@ -123,5 +127,6 @@
   "triggeredItemView": "{{{}}}",
   "type": "LIST_WIDGET_V2",
   "widgetId": "1lk55wvevc",
-  "widgetName": "List1"
+  "widgetName": "List1",
+  "onItemClick": "{{storeValue('editingActivity', List1.triggeredItem).then(() => showModal('Edit_Activity_Modal'));}}"
 }

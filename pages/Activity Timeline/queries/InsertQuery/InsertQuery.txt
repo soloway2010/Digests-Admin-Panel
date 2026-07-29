@@ -1,0 +1,3 @@
+-- Timeline activities are created by Digest.Bot from submitted digests.
+-- Manual insert is disabled; keep this query as a no-op placeholder.
+SELECT 1 WHERE FALSE;

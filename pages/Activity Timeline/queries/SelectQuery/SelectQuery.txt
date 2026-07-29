@@ -1,0 +1,40 @@
+SELECT
+  ua.id,
+  ua.user_id,
+  COALESCE(t.user_name, latest.user_name, ua.user_id) AS user_name,
+  ua.name,
+  ua.started_at,
+  ua.last_seen_at,
+  (
+    SELECT COUNT(*)::int
+    FROM public.digest_activities da
+    WHERE da.user_activity_id = ua.id
+  ) AS sightings
+FROM public.user_activities ua
+LEFT JOIN public.teammates t ON t.user_id = ua.user_id
+LEFT JOIN LATERAL (
+  SELECT d.user_name
+  FROM public.digests d
+  WHERE d.user_id = ua.user_id
+  ORDER BY d.submitted_at DESC
+  LIMIT 1
+) latest ON TRUE
+WHERE {{
+  ["p.solovev@sdgroup.ai"].map((e) => e.toLowerCase()).includes((appsmith.user.email || "").toLowerCase())
+    ? (
+        data_table.searchText
+          ? "(ua.name ILIKE '%" + data_table.searchText.replace(/'/g, "''") + "%' OR COALESCE(t.user_name, latest.user_name, ua.user_id) ILIKE '%" + data_table.searchText.replace(/'/g, "''") + "%')"
+          : "TRUE"
+      )
+    : (
+        "ua.user_id IN (SELECT DISTINCT user_id FROM public.digests WHERE user_name ILIKE '%" +
+        (appsmith.user.email || "").split("@")[0].replace(/'/g, "''") +
+        "%')" +
+        (data_table.searchText
+          ? " AND ua.name ILIKE '%" + data_table.searchText.replace(/'/g, "''") + "%'"
+          : "")
+      )
+}}
+ORDER BY ua.last_seen_at DESC
+LIMIT {{data_table.pageSize}}
+OFFSET {{(data_table.pageNo - 1) * data_table.pageSize}};

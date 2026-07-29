@@ -1,6 +1,11 @@
 INSERT INTO public."teammates" (
 	"user_id",
 	"user_name")
-VALUES (
+SELECT
 	'{{insert_form.formData.user_id}}',
-	'{{insert_form.formData.user_name}}');
+	'{{insert_form.formData.user_name}}'
+WHERE {{
+  ["p.solovev@sdgroup.ai"].map((e) => e.toLowerCase()).includes((appsmith.user.email || "").toLowerCase())
+    ? true
+    : false
+}};

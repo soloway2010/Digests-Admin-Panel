@@ -1,0 +1,12 @@
+UPDATE public.user_activities
+SET name = '{{update_form.fieldState.name.isVisible ? update_form.formData.name : update_form.sourceData.name}}'
+WHERE id = {{data_table.selectedRow.id}}
+AND {{
+  ["p.solovev@sdgroup.ai"].map((e) => e.toLowerCase()).includes((appsmith.user.email || "").toLowerCase())
+    ? "TRUE"
+    : "user_id IN (SELECT DISTINCT user_id FROM public.digests WHERE user_name ILIKE '%" + (appsmith.user.email || "").split("@")[0].replace(/'/g, "''") + "%')"
+}};
+
+UPDATE public.digest_activities
+SET name = '{{update_form.fieldState.name.isVisible ? update_form.formData.name : update_form.sourceData.name}}'
+WHERE user_activity_id = {{data_table.selectedRow.id}};

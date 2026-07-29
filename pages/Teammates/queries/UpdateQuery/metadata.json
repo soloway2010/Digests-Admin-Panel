@@ -5,12 +5,12 @@
   "pluginType": "DB",
   "unpublishedAction": {
     "actionConfiguration": {
-      "body": "UPDATE public.\"teammates\" SET\n\t\t\"user_id\" = '{{update_form.fieldState.user_id.isVisible ? update_form.formData.user_id : update_form.sourceData.user_id}}',\n\t\t\"user_name\" = '{{update_form.fieldState.user_name.isVisible ? update_form.formData.user_name : update_form.sourceData.user_name}}'\nWHERE \"id\" = {{data_table.selectedRow.id}};",
+      "body": "UPDATE public.\"teammates\" SET\n\t\t\"user_id\" = '{{update_form.fieldState.user_id.isVisible ? update_form.formData.user_id : update_form.sourceData.user_id}}',\n\t\t\"user_name\" = '{{update_form.fieldState.user_name.isVisible ? update_form.formData.user_name : update_form.sourceData.user_name}}'\nWHERE \"user_id\" = '{{data_table.selectedRow.user_id}}'\nAND {{\n  [\"p.solovev@sdgroup.ai\"].map((e) => e.toLowerCase()).includes((appsmith.user.email || \"\").toLowerCase())\n    ? \"TRUE\"\n    : \"FALSE\"\n}};\n",
       "encodeParamsToggle": true,
       "paginationType": "NONE",
       "pluginSpecifiedTemplates": [
         {
-          "value": true
+          "value": false
         }
       ],
       "timeoutInMillisecond": 10000

@@ -21,13 +21,13 @@
       "leftColumn": 0,
       "minHeight": 870,
       "parentColumnSpace": 1,
-      "parentId": "mvubsemxfo",
+      "parentId": "0a97b7054c",
       "parentRowSpace": 1,
       "rightColumn": 632,
       "topRow": 0,
       "type": "CANVAS_WIDGET",
       "version": 1,
-      "widgetId": "59rw5mx0bq",
+      "widgetId": "9e4efab7fb",
       "widgetName": "Canvas1"
     }
   ],
@@ -38,9 +38,6 @@
     },
     {
       "key": "boxShadow"
-    },
-    {
-      "key": "isVisible"
     }
   ],
   "dynamicHeight": "FIXED",
@@ -54,7 +51,7 @@
   ],
   "dynamicTriggerPathList": [],
   "isLoading": false,
-  "isVisible": "{{['p.solovev@sdgroup.ai'].map((e) => e.toLowerCase()).includes((appsmith.user.email || '').toLowerCase())}}",
+  "isVisible": "true",
   "labelTextSize": "0.875rem",
   "leftColumn": 0,
   "maxDynamicHeight": 9000,
@@ -67,6 +64,6 @@
   "topRow": 0,
   "type": "CONTAINER_WIDGET",
   "version": 1,
-  "widgetId": "mvubsemxfo",
+  "widgetId": "0a97b7054c",
   "widgetName": "Container1"
 }

@@ -1,2 +1,7 @@
 DELETE FROM public."teammates"
-  WHERE "id" = {{data_table.triggeredRow.id}};
+WHERE "user_id" = '{{data_table.triggeredRow.user_id}}'
+AND {{
+  ["p.solovev@sdgroup.ai"].map((e) => e.toLowerCase()).includes((appsmith.user.email || "").toLowerCase())
+    ? "TRUE"
+    : "FALSE"
+}};

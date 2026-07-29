@@ -1,12 +1,12 @@
 {
-  "gitSyncId": "6a35452858cb8047060f95e6_9697b004-609b-4956-ab9b-1aed874d99cc",
+  "gitSyncId": "6a35452858cb8047060f95e6_2d9ab2bb-c6d0-4acd-a7ac-df54472e4b18",
   "unpublishedPage": {
     "isHidden": false,
     "layouts": [
       {
         "dsl": {
           "backgroundColor": "none",
-          "bottomRow": 580,
+          "bottomRow": 860,
           "canExtend": true,
           "containerStyle": "none",
           "detachFromLayout": true,
@@ -27,7 +27,7 @@
         }
       }
     ],
-    "name": "Submitted digests",
-    "slug": "submitted-digests"
+    "name": "Activity Timeline",
+    "slug": "activity-timeline"
   }
 }

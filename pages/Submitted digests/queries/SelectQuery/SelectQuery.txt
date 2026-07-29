@@ -1,5 +1,10 @@
-SELECT * FROM public."digests"
-WHERE "user_name" ilike '%{{appsmith.user.email.split('@')[0]}}%'
+SELECT *
+FROM public."digests"
+WHERE {{
+  ["p.solovev@sdgroup.ai"].map((e) => e.toLowerCase()).includes((appsmith.user.email || "").toLowerCase())
+    ? "TRUE"
+    : "user_name ILIKE '%" + (appsmith.user.email || "").split("@")[0].replace(/'/g, "''") + "%'"
+}}
 ORDER BY submitted_at DESC
 LIMIT {{data_table.pageSize}}
 OFFSET {{(data_table.pageNo - 1) * data_table.pageSize}};

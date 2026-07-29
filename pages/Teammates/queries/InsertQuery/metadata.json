@@ -5,12 +5,12 @@
   "pluginType": "DB",
   "unpublishedAction": {
     "actionConfiguration": {
-      "body": "INSERT INTO public.\"teammates\" (\n\t\"user_id\",\n\t\"user_name\")\nVALUES (\n\t'{{insert_form.formData.user_id}}',\n\t'{{insert_form.formData.user_name}}');",
+      "body": "INSERT INTO public.\"teammates\" (\n\t\"user_id\",\n\t\"user_name\")\nSELECT\n\t'{{insert_form.formData.user_id}}',\n\t'{{insert_form.formData.user_name}}'\nWHERE {{\n  [\"p.solovev@sdgroup.ai\"].map((e) => e.toLowerCase()).includes((appsmith.user.email || \"\").toLowerCase())\n    ? true\n    : false\n}};\n",
       "encodeParamsToggle": true,
       "paginationType": "NONE",
       "pluginSpecifiedTemplates": [
         {
-          "value": true
+          "value": false
         }
       ],
       "timeoutInMillisecond": 10000

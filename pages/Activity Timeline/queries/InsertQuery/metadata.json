@@ -1,16 +1,16 @@
 {
-  "gitSyncId": "6a35452858cb8047060f95e6_73fc6b41-92f2-4e19-a66f-846046b5e577",
-  "id": "Submitted digests_SelectDigest",
+  "gitSyncId": "6a35452858cb8047060f95e6_20666fca-0782-4f7d-884a-bbbc9212eabf",
+  "id": "Activity Timeline_InsertQuery",
   "pluginId": "postgres-plugin",
   "pluginType": "DB",
   "unpublishedAction": {
     "actionConfiguration": {
-      "body": "SELECT * FROM public.\"digests\" where id = {{data_table.selectedItem.id}};",
+      "body": "-- Timeline activities are created by Digest.Bot from submitted digests.\n-- Manual insert is disabled; keep this query as a no-op placeholder.\nSELECT 1 WHERE FALSE;\n",
       "encodeParamsToggle": true,
       "paginationType": "NONE",
       "pluginSpecifiedTemplates": [
         {
-          "value": true
+          "value": false
         }
       ],
       "timeoutInMillisecond": 10000
@@ -27,9 +27,9 @@
         "key": "body"
       }
     ],
-    "name": "SelectDigest",
-    "pageId": "Submitted digests",
-    "runBehaviour": "AUTOMATIC",
+    "name": "InsertQuery",
+    "pageId": "Activity Timeline",
+    "runBehaviour": "MANUAL",
     "userSetOnLoad": false
   }
 }

@@ -6,12 +6,16 @@
   "evaluationVersion": 2,
   "pages": [
     {
-      "id": "Teammates",
+      "id": "Submitted digests",
+      "isDefault": true
+    },
+    {
+      "id": "Activity Timeline",
       "isDefault": false
     },
     {
-      "id": "Submitted digests",
-      "isDefault": true
+      "id": "Teammates",
+      "isDefault": false
     }
   ]
 }

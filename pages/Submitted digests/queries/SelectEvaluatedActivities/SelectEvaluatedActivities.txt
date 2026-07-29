@@ -1,1 +1,13 @@
-SELECT * FROM public."digest_activities" WHERE digest_id = {{SelectDigest.data[0].id}};
+SELECT
+  da.id,
+  da.digest_id,
+  da.user_activity_id,
+  da.name,
+  da.is_new,
+  da.extracted_at,
+  ua.started_at,
+  ua.last_seen_at
+FROM public.digest_activities da
+LEFT JOIN public.user_activities ua ON ua.id = da.user_activity_id
+WHERE da.digest_id = {{SelectDigest.data[0].id}}
+ORDER BY da.extracted_at ASC;

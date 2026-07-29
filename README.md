@@ -1,11 +1,69 @@
-![](https://raw.githubusercontent.com/appsmithorg/appsmith/release/static/appsmith_logo_primary.png)
+# Digests Admin Panel (Appsmith)
 
-This app is built using Appsmith. Turn any datasource into an internal app in minutes. Appsmith lets you drag-and-drop components to build dashboards, write logic with JavaScript objects and connect to any API, database or GraphQL source.
+Appsmith app for viewing digests, editing activity names, and browsing the activity timeline. Built against the Digest.Bot schema (`digests`, `user_activities`, `digest_activities`, `teammates`).
 
-![](https://raw.githubusercontent.com/appsmithorg/appsmith/release/static/images/integrations.png)
+See [Appsmith docs](https://docs.appsmith.com/) for self-hosting and Git sync.
 
-### [Github](https://github.com/appsmithorg/appsmith) • [Docs](https://docs.appsmith.com/?utm_source=github&utm_medium=social&utm_content=appsmith_docs&utm_campaign=null&utm_term=appsmith_docs) • [Community](https://community.appsmith.com/) • [Tutorials](https://github.com/appsmithorg/appsmith/tree/update/readme#tutorials) • [Youtube](https://www.youtube.com/appsmith) • [Discord](https://discord.gg/rBTTVJp)
+## Admins vs viewers
 
-##### You can visit the application using the below link
+No Business Edition / GAC required. Admins are a fixed email allowlist checked against [`appsmith.user.email`](https://docs.appsmith.com/reference/appsmith-framework/context-object):
 
-###### [![](https://assets.appsmith.com/git-sync/Buttons.svg) ](http://localhost/applications/6a35452858cb8047060f95e6/pages/6a35452958cb8047060f95e8) [![](https://assets.appsmith.com/git-sync/Buttons2.svg)](http://localhost/applications/6a35452858cb8047060f95e6/pages/6a35452958cb8047060f95e8/edit)
+```js
+["p.solovev@sdgroup.ai"].map((e) => e.toLowerCase()).includes((appsmith.user.email || "").toLowerCase())
+```
+
+| Who | Access |
+|-----|--------|
+| Email in the allowlist | All digests & timeline activities; Teammates page |
+| Everyone else | Only their own digests/activities (email local-part matched to `digests.user_name`) |
+
+### Add or remove admins
+
+Edit the email array in these places (keep the lists identical):
+
+- `pages/Submitted digests/queries/SelectQuery/SelectQuery.txt`
+- `pages/Submitted digests/queries/UpdateDigestActivity/UpdateDigestActivity.txt`
+- `pages/Activity Timeline/queries/SelectQuery/SelectQuery.txt`
+- `pages/Activity Timeline/queries/UpdateQuery/UpdateQuery.txt`
+- `pages/Activity Timeline/queries/DeleteQuery/DeleteQuery.txt`
+- `pages/Activity Timeline/widgets/Container1/data_table.json` (Delete column visibility)
+- `pages/Teammates/queries/{Insert,Update,Delete}Query/*.txt`
+- `pages/Teammates/widgets/Container1/Container1.json` (page visibility)
+
+Example with two admins:
+
+```js
+["p.solovev@sdgroup.ai", "other@sdgroup.ai"].map((e) => e.toLowerCase()).includes((appsmith.user.email || "").toLowerCase())
+```
+
+After editing `.txt` query files, copy the same body into the matching `metadata.json` `unpublishedAction.actionConfiguration.body` (or edit the query in the Appsmith UI and commit).
+
+## Pages
+
+1. **Submitted digests** — list digests; open one to see `digest_activities`; click an activity to rename it.
+2. **Activity Timeline** — `user_activities` (name, dates, sighting count); rename/delete.
+3. **Teammates** — roster CRUD; visible only to allowlisted admins.
+
+## Identity matching
+
+Viewers are scoped with:
+
+```text
+user_name ILIKE '%' || appsmith.user.email.split('@')[0] || '%'
+```
+
+Slack `user_name` should align with the email local-part (or adjust the queries).
+
+## After pull
+
+1. Pull the branch in Appsmith  
+2. Confirm datasource **Digests**  
+3. Run page queries once; redeploy  
+4. Sign in as an allowlisted admin and as a normal viewer to verify scoping  
+
+## Schema reference
+
+Digest.Bot migrations:
+
+- `000_schema.sql` — `teammates`, `digests`
+- `001_activity_timeline.sql` — `user_activities`, `digest_activities`
