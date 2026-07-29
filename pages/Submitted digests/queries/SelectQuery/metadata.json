@@ -5,7 +5,7 @@
   "pluginType": "DB",
   "unpublishedAction": {
     "actionConfiguration": {
-      "body": "SELECT *\nFROM public.\"digests\"\nWHERE {{\n  [\"p.solovev@sdgroup.ai\"].map((e) => e.toLowerCase()).includes((appsmith.user.email || \"\").toLowerCase())\n    ? \"TRUE\"\n    : \"user_name ILIKE '%\" + (appsmith.user.email || \"\").split(\"@\")[0].replace(/'/g, \"''\") + \"%'\"\n}}\nORDER BY submitted_at DESC\nLIMIT {{data_table.pageSize}}\nOFFSET {{(data_table.pageNo - 1) * data_table.pageSize}};\n",
+      "body": "SELECT *\nFROM public.\"digests\"\nWHERE {{\n  [\"p.solovev@sdgroup.ai\"].map((e) => e.toLowerCase()).includes((appsmith.user.email).toLowerCase())\n    ? \"TRUE\"\n    : \"user_name = '\" + appsmith.user.email.split(\"@\")[0] + \"'\"\n}}\nORDER BY submitted_at DESC\nLIMIT {{data_table.pageSize}}\nOFFSET {{(data_table.pageNo - 1) * data_table.pageSize}};\n",
       "encodeParamsToggle": true,
       "paginationType": "NONE",
       "pluginSpecifiedTemplates": [

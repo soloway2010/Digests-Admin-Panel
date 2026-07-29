@@ -1,9 +1,9 @@
 SELECT *
 FROM public."digests"
 WHERE {{
-  ["p.solovev@sdgroup.ai"].map((e) => e.toLowerCase()).includes((appsmith.user.email || "").toLowerCase())
+  ["p.solovev@sdgroup.ai"].map((e) => e.toLowerCase()).includes((appsmith.user.email).toLowerCase())
     ? "TRUE"
-    : "user_name ILIKE '%" + (appsmith.user.email || "").split("@")[0].replace(/'/g, "''") + "%'"
+    : "user_name = '" + appsmith.user.email.split("@")[0] + "'"
 }}
 ORDER BY submitted_at DESC
 LIMIT {{data_table.pageSize}}
