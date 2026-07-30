@@ -5,7 +5,7 @@
   "pluginType": "DB",
   "unpublishedAction": {
     "actionConfiguration": {
-      "body": "SELECT * FROM public.\"teammates\"\nWHERE \"user_name\" ilike '%{{data_table.searchText || \"\"}}%'\nORDER BY \"{{data_table.sortOrder.column || 'user_name'}}\" {{data_table.sortOrder.order || 'ASC'}}\nLIMIT {{data_table.pageSize}}\nOFFSET {{(data_table.pageNo - 1) * data_table.pageSize}};",
+      "body": "SELECT * FROM public.\"teammates\"\nWHERE {{ [\"p.solovev@sdgroup.ai\"].map((e) => e.toLowerCase()).includes((appsmith.user.email || \"\").toLowerCase())\n    ? \"user_name ilike '%\" + data_table.searchText || \"\" + \"%'\" : \"FALSE\" }}\nORDER BY \"{{data_table.sortOrder.column || 'user_name'}}\" {{data_table.sortOrder.order || 'ASC'}}\nLIMIT {{data_table.pageSize}}\nOFFSET {{(data_table.pageNo - 1) * data_table.pageSize}};",
       "encodeParamsToggle": true,
       "paginationType": "NONE",
       "pluginSpecifiedTemplates": [
